@@ -42,16 +42,11 @@ jobs:
       run: |
         bash jadx.sh
 
-    - name: Commit and push changes
+    - name: archive
       run: |
-        git config user.email "noreply@github.com"
-        git config user.name "GitHub Action"
-        git add rom-decompiled-jadx
-        if [ -z "$(git status --porcelain)" ]; then
-          echo "No changes to commit"
-        else
-          git commit -m "auto update"
-          git push
-        fi
+        tar -czf rom-decompiled-jadx.tar.gz rom-decompiled-jadx
 
-
+    - uses: actions/upload@v2
+      with:
+        name: rom-decompiled-jadx
+        path: rom-decompiled-jadx.tar.gz
