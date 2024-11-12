@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-axel -n 10 -o rom.zip http://sysupwrdl.vivo.com.cn/upgrade/official/officialFiles/PD1986_A_1.9.3-update-full_1599011925.zip
+if [ -z "$ROM_URL" ]; then
+  echo "no rom url"
+	exit 1
+fi
+
+axel -n 10 -o rom.zip $ROM_URL
 
 ./tools/rom.sh rom.zip out
 
